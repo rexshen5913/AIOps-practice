@@ -1,0 +1,53 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: aiops.aiops.geektime.com # <plural>.<group>
+spec:
+  group: aiops.geektime.com
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                modelType:
+                  type: string
+                  description: Type of the AI model (e.g., regression, classification)
+                modelVersion:
+                  type: string
+                  description: Version of the AI model
+                trainingData:
+                  type: string
+                  description: Reference to the training data source
+                hyperparameters:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Hyperparameters used for model training
+            status:
+              type: object
+              properties:
+                state:
+                  type: string
+                  description: Current state of the AIOps process (e.g., running, completed, failed)
+                lastUpdated:
+                  type: string
+                  format: date-time
+                  description: Last time the status was updated
+                results:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Results or metrics from the AIOps process
+  scope: Namespaced
+  names:
+    plural: aiops
+    singular: aiop
+    kind: AIOps
+    shortNames:
+      - ai

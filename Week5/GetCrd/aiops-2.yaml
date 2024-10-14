@@ -1,0 +1,12 @@
+apiVersion: aiops.geektime.com/v1alpha1
+kind: AIOps
+metadata:
+  name: test-aiop
+  namespace: default
+spec:
+  modelType: regression
+  modelVersion: v1.10
+  trainingData: s3://mybucket/training-data-2.csv
+  hyperparameters:
+    learningRate: "0.05"
+    batchSize: "100"
